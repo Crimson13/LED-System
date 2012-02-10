@@ -42,6 +42,8 @@ LiquidCrystal lcd(7, 8, 9, 10, 11, 12);
 void setup()
 {
     Serial.begin(19200);
+    // Initialize Lights
+    setup_li();
     // Initialize NukerChuck
     setup_nc();
     // Initialize the menu
@@ -158,6 +160,8 @@ void ShowZoneItem(const int zone)
 // Main program loop
 void loop()
 {
+  // Have the light script take a step
+  loop_li(z1,z2,z3,m1,m2,m3);
   // Process menu movement
   switch (loop_nc()) {
     case 0: // Center
