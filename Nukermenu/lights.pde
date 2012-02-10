@@ -1,5 +1,5 @@
 // Settings
-int s_m1_z1_stepdelay = 75;
+int s_m1_z1_stepdelay = 30; // Flash speed
 int s_m1_z1_stepcount = 15;
 int s_m1_z1_redpin = 2;
 int s_m1_z1_bluepin = 3;
