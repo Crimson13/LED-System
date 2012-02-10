@@ -3,11 +3,19 @@ int s_m1_stepdelay = 75; // Temp Note: Crim lowered this to 30 on the old system
 int s_m1_stepcount = 15;
 int s_m1_z1_redpin = 2;
 int s_m1_z1_bluepin = 3;
+int s_m2_stepdelay = 99;
+int s_m2_stepcount = 99;
+int s_m3_stepdelay = 99;
+int s_m3_stepcount = 99;
 
 // Progress
 int lasttime = 0;
 int m1_step = 0;
 int m1_timeleft = 0;
+int m2_step = 0;
+int m2_timeleft = 0;
+int m3_step = 0;
+int m3_timeleft = 0;
 
 void setup_li()
 {
@@ -19,7 +27,9 @@ void loop_li(byte m1, byte m2, byte m3, byte z1, byte z2, byte z3)
 {
   int diff = millis() - lasttime; // How much time has past since the last loop
   if (m1) m1_dostep(z1, z2, z3, diff);
-  lasttime = millis() // Record the time before returning
+  if (m2) m2_dostep(z1, z2, z3, diff);
+  if (m3) m3_dostep(z1, z2, z3, diff);
+  lasttime = millis(); // Record the time before returning
 }
 
 void m1_dostep(byte z1, byte z2, byte z3, int timediff)
@@ -74,3 +84,40 @@ void m1_dostep(byte z1, byte z2, byte z3, int timediff)
     m1_timeleft = s_m1_stepdelay;
   }
 }
+
+void m2_dostep(byte z1, byte z2, byte z3, int timediff)
+{
+  m2_timeleft -= timediff; // Update time remaining
+  
+  if (m2_timeleft <= 0) {
+    switch (m2_step) {
+      default:
+        break; /* Nothing yet... */
+    }
+    // If we did the last step, start over, otherwise increment step count.
+    if (m2_step > s_m2_stepcount) m2_step = 0;
+    else m2_step++;
+      
+    // Reset time remaining till next step
+    m2_timeleft = s_m2_stepdelay;
+  }
+}
+
+void m3_dostep(byte z1, byte z2, byte z3, int timediff)
+{
+  m3_timeleft -= timediff; // Update time remaining
+  
+  if (m3_timeleft <= 0) {
+    switch (m3_step) {
+      default:
+        break; /* Nothing yet... */
+    }
+    // If we did the last step, start over, otherwise increment step count.
+    if (m3_step > s_m3_stepcount) m3_step = 0;
+    else m3_step++;
+      
+    // Reset time remaining till next step
+    m3_timeleft = s_m3_stepdelay;
+  }
+}
+
