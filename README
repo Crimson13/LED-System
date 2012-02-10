@@ -7,10 +7,12 @@ Description:
 Requirements:
 -------------
 * Arduino 0023
+* Menu Library 1.0 (http://arduino.cc/playground/Code/Menu)
 
 Acknowledgements:
 -----------------
 * Nunchuck code based on code from Grant Emsley (http://arduino.emsley.ca)
+* Menu Library by Alexander Brevig
 
 Other Notes:
 ------------
