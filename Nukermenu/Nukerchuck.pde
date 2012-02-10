@@ -14,7 +14,7 @@ int lastpos=0;
 
 byte accx,accy,zbut,cbut;
 int ledPin = 13;
-int th = 60;
+int th = 60; // Threshold
 
 
 void setup_nc()
