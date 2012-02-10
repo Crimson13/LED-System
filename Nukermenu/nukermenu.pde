@@ -4,10 +4,13 @@
 #include <SubMenuItem.h>
 #include <LiquidCrystal.h>
 
-// Debug
-byte posdebug=0;
+// Debug Defintions (Set at compile time)
+#define DEBUG_DIS_PTS 1   // Print display to serial
+#define DEBUG_EVT_TRG 0   // Display when events are triggered
+#define DEBUG_NUM_POS 0   // Position of numchuck
 
-byte achange=0; // Allow the menu to change?
+// Anti-Input Duplication Flags
+byte achange=0;
 byte zlast=0;
 byte clast=0;
 
@@ -35,6 +38,7 @@ Menu menu = Menu(menuUsed,menuChanged);
 // Prepare the LiquidCrystal Library
 LiquidCrystal lcd(7, 8, 9, 10, 11, 12);
 
+// Setup: Ran when program is loaded.
 void setup()
 {
     Serial.begin(19200);
@@ -51,17 +55,21 @@ void setup()
         subZones.addSubMenuItem(SubZones1);
         subZones.addSubMenuItem(SubZones2);
         subZones.addSubMenuItem(SubZones3);
-    // Initialize the LCD
-    lcd.begin(16, 2);
-    
     menu.select(0);
     subModes.select(0);
     subZones.select(0);
     
-    Serial.println("Setup Complete");
-    lcd.print("LCD Ready"); // Test LCD Display
+    // Initialize the Custom Logo
+    setuplogo();
+    
+    // Initialize the LCD
+    lcd.begin(16, 2);
+    
+    display("Setup Complete");
+    displaylogo("Ready");
 }
 
+/* Following functions prevent duplicate inputs by holding down the button */
 byte canMenuChange()
 {
   if (achange == 1) {
@@ -70,7 +78,6 @@ byte canMenuChange()
   }
   return 0;
 }
-
 byte check_z()
 {
   if (nc_z()) {
@@ -82,7 +89,6 @@ byte check_z()
   else zlast = 0;
   return 0;
 }
-
 byte check_c()
 {
   if (nc_c()) {
@@ -93,22 +99,83 @@ byte check_c()
   }
   else clast = 0;
   return 0;
-}    
+}
 
+// Display given text to the LCD after clearing it
+void display(const char text[])
+{
+    #if DEBUG_DIS_PTS
+    Serial.print("Displaying: ");
+    Serial.print(text);
+    Serial.println();
+    #endif
+    lcd.clear();
+    lcd.print(text);
+}
+
+// Display the given mode and if its on or off
+void ShowModeItem(const int mode)
+{
+    if (mode == 1)
+    {
+        if (m1) { display("Mode 1 - ON"); }
+        else { display("Mode 1 - OFF"); }
+    }
+    else if (mode == 2)
+    {
+        if (m2) { display("Mode 2 - ON"); }
+        else { display("Mode 2 - OFF"); }
+    }
+    else if (mode == 3)
+    {
+        if (m3) { display("Mode 3 - ON"); }
+        else { display("Mode 3 - OFF"); }
+    }
+    else { display("Error: Invalid Mode Given!"); }
+}
+
+// Display the given zone and if its on or off
+void ShowZoneItem(const int zone)
+{
+    if (zone == 1)
+    {
+        if (z1) { display("Zone 1 - ON"); }
+        else { display("Zone 1 - OFF"); }
+    }
+    else if (zone == 2)
+    {
+        if (z2) { display("Zone 2 - ON"); }
+        else { display("Zone 2 - OFF"); }
+    }
+    else if (zone == 3)
+    {
+        if (z3) { display("Zone 3 - ON"); }
+        else { display("Zone 3 - OFF"); }
+    }
+    else { display("Error: Invalid Zone Given!"); }
+}
+
+// Main program loop
 void loop()
 {
-  // Process menu movement (TODO: Finish up/Test)
+  // Process menu movement
   switch (loop_nc()) {
     case 0: // Center
-      if (posdebug == 1) Serial.println("Pos: Center");
+      #if DEBUG_NUM_POS
+      display("Pos: Center");
+      #endif
       achange=1;
       break;
     case 1: // Up
-      if (posdebug == 1) Serial.println("Pos: Up");
+      #if DEBUG_NUM_POS
+      display("Pos: Up");
+      #endif
       if (canMenuChange()) menu.up();
       break;
     case 2: // Right
-      if (posdebug == 1) Serial.println("Pos: Right");
+      #if DEBUG_NUM_POS
+      display("Pos: Right");
+      #endif
       if (menu.isCurrentSubMenu()) {
         if (menu.getCurrentItem() == &menuModes) {
           if (canMenuChange()) subModes.up();
@@ -119,11 +186,15 @@ void loop()
       }
       break;
     case 3: // Down
-      if (posdebug == 1) Serial.println("Pos: Down");
+      #if DEBUG_NUM_POS
+      display("Pos: Down");
+      #endif
       if (canMenuChange()) menu.down();
       break;
     case 4: // Left
-      if (posdebug == 1) Serial.println("Pos: Left");
+      #if DEBUG_NUM_POS
+      display("Pos: Left");
+      #endif
       if (menu.isCurrentSubMenu()) {
         if (menu.getCurrentItem() == &menuModes) {
           if (canMenuChange()) subModes.down();
@@ -134,11 +205,13 @@ void loop()
       }
       break;
     case -1: // Error
-      if (posdebug == 1) Serial.println("Pos: Error");
+      #if DEBUG_NUM_POS
+      display("Pos: Error");
+      #endif
       break;
   }
   
-  // Process button presses (TODO: Finish up/Test)
+  // Process button presses
   // Note: I believe select goes down a menu, and
   //       use calls menuUsed() function.
   if (check_z()) { menu.select(1); }
@@ -147,84 +220,60 @@ void loop()
   delay(1);
 }
 
+// Event: Called when the menu item has changed.
 void menuChanged(ItemChangeEvent event)
 {
-  Serial.println("ChangeEvent Triggered");
+  #if DEBUG_EVT_TRG
+  display("ChangeEvent Triggered");
+  #endif
   // Display the menu
-  if (event == &menuModes) { Serial.println("Modes"); }
-  else if (event == &SubModes1) { Serial.println("Mode 1"); }
-  else if (event == &SubModes2) { Serial.println("Mode 2"); }
-  else if (event == &SubModes3) { Serial.println("Mode 3"); }
-  else if (event == &menuZones) { Serial.println("Zones"); }
-  else if (event == &SubZones1) { Serial.println("Zone 1"); }
-  else if (event == &SubZones2) { Serial.println("Zone 2"); }
-  else if (event == &SubZones3) { Serial.println("Zone 3"); }
-  else { Serial.println("Error: Unknown Menu Item"); }
+  if (event == &menuModes) { display("Modes"); }
+  else if (event == &SubModes1) { ShowModeItem(1); }
+  else if (event == &SubModes2) { ShowModeItem(2); }
+  else if (event == &SubModes3) { ShowModeItem(3); }
+  else if (event == &menuZones) { display("Zones"); }
+  else if (event == &SubZones1) { ShowZoneItem(1); }
+  else if (event == &SubZones2) { ShowZoneItem(2); }
+  else if (event == &SubZones3) { ShowZoneItem(3);; }
+  else { display("Error: Unknown Menu Item"); }
 }
 
+// Event: Called when a menu item is used.
 void menuUsed(ItemUseEvent event)
 {
-  Serial.println("UseEvent Triggered");
+  #if DEBUG_EVT_TRG
+  display("UseEvent Triggered");
+  #endif
   // Turn things on or off
   if (event == &SubModes1) { 
-    if (m1 == 0) {
-      m1 = 1;
-      Serial.println("Mode 1 - ON");
-    }
-    else {
-      m1 = 0;
-      Serial.println("Mode 1 - OFF"); 
-    }
+    if (m1 == 0) { m1 = 1; }
+    else { m1 = 0; }
+    ShowModeItem(1);
   }
   else if (event == &SubModes2) {
-    if (m2 == 0) {
-      m2 = 1;
-      Serial.println("Mode 2 - ON");
-    }
-    else {
-      m2 = 0;
-      Serial.println("Mode 2 - OFF"); 
-    }
+    if (m2 == 0) { m2 = 1; }
+    else { m2 = 0; }
+    ShowModeItem(2);
   }
   else if (event == &SubModes3) {
-    if (m3 == 0) {
-      m3 = 1;
-      Serial.println("Mode 3 - ON");
-    }
-    else {
-      m3 = 0;
-      Serial.println("Mode 3 - OFF"); 
-    }
+    if (m3 == 0) { m3 = 1; }
+    else { m3 = 0; }
+    ShowModeItem(3);
   }
   else if (event == &SubZones1) {
-    if (z1 == 0) {
-      z1 = 1;
-      Serial.println("Zone 1 - ON");
-    }
-    else {
-      z1 = 0;
-      Serial.println("Zone 1 - OFF"); 
-    }
+    if (z1 == 0) { z1 = 1; }
+    else { z1 = 0; }
+    ShowZoneItem(1);
   }
   else if (event == &SubZones2) {
-    if (z2 == 0) {
-      z2 = 1;
-      Serial.println("Zone 2 - ON");
-    }
-    else {
-      z2 = 0;
-      Serial.println("Zone 2 - OFF"); 
-    }
+    if (z2 == 0) { z2 = 1; }
+    else { z2 = 0; }
+    ShowZoneItem(2);
   }
   else if (event == &SubZones3) {
-    if (z3 == 0) {
-      z3 = 1;
-      Serial.println("Zone 3 - ON");
-    }
-    else {
-      z3 = 0;
-      Serial.println("Zone 3 - OFF"); 
-    }
+    if (z3 == 0) { z3 = 1; }
+    else { z3 = 0; }
+    ShowZoneItem(3);
   }
-  else { Serial.println("Error: Unknown or invalid selection"); }
+  else { display("Error: Unknown or invalid selection"); }
 }
