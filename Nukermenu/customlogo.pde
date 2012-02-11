@@ -1,3 +1,9 @@
+/*
+ * LED-System: Custom Logo
+ *
+ * Setups and displays a custom logo when the program is first loaded.
+ */
+
 #include <LiquidCrystal.h>
 
 // Custom logo to display (I wonder why a dimensional array didn't work... I blame crim)
@@ -8,7 +14,7 @@ byte logo3[8] = { B11100, B00010, B11001, B10100, B10100, B11001, B00010, B11100
 byte logo4[8] = { B00000, B00000, B00000, B10000, B10000, B00000, B00000, B00000 };
 
 // Setups and initializes the custom logo 
-void setuplogo() {
+void setup_cl() {
   lcd.createChar(0, logo0);
   lcd.createChar(1, logo1);
   lcd.createChar(2, logo2);

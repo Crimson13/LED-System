@@ -1,3 +1,9 @@
+/*
+ * LED-System: Menu System
+ *
+ * Controls the menu, menu navigation, and what is displayed.
+ */
+
 #include <Menu.h>
 #include <MenuItem.h>
 #include <SubMenu.h>
@@ -42,10 +48,10 @@ LiquidCrystal lcd(7, 8, 9, 10, 11, 12);
 void setup()
 {
     Serial.begin(19200);
-    // Initialize Lights
-    setup_li();
-    // Initialize NukerChuck
-    setup_nc();
+    
+    // Initialize the LCD
+    lcd.begin(16, 2);
+    
     // Initialize the menu
     menu.addMenuItem(menuModes);
       menuModes.addSubMenu(subModes);
@@ -61,11 +67,9 @@ void setup()
     subModes.select(0);
     subZones.select(0);
     
-    // Initialize the Custom Logo
-    setuplogo();
-    
-    // Initialize the LCD
-    lcd.begin(16, 2);
+    setup_nc(); // Initialize NukerChuck
+    setup_li(); // Initialize Lights
+    setup_cl(); // Initialize the Custom Logo
     
     display("Setup Complete");
     displaylogo("Ready");

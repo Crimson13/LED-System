@@ -1,8 +1,8 @@
 /*
- * WiiChuckDemo -- 
+ * LED-System: Wii Nunchuck
  *
- * 2008 Tod E. Kurt, http://thingm.com/
- *
+ * Code to query the state of the Wii Nunchuck and return wheres its pointing
+ * at and what buttons are being pressed.
  */
 
 #include <Wire.h>
@@ -19,13 +19,13 @@ int th = 60; // Threshold
 
 void setup_nc()
 {
-   // Serial.begin(19200);
-    nunchuck_setpowerpins();
-    nunchuck_init(); // send the initilization handshake
-    nunchuck_calibrate(); 
-    numchuck_manual_calibrate(123,132);
+  
+  nunchuck_setpowerpins();
+  nunchuck_init(); // send the initilization handshake
+  nunchuck_calibrate(); 
+  numchuck_manual_calibrate(123,132);
     
-    if (ncdebug == 1) Serial.print("WiiChuckDemo ready\n");
+  if (ncdebug == 1) Serial.print("Nunchuck ready\n");
 }
 
 byte nc_z() { return zbut; }
@@ -49,7 +49,7 @@ int loop_nc()
   cbut = nunchuck_cbutton(); 
         
   int x = nunchuck_digitalx(th);
-  int y = nunchuck_digitaly(th);	
+  int y = nunchuck_digitaly(th);
 
   if (x == 0) {
     if (y == 0) {

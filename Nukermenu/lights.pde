@@ -1,3 +1,9 @@
+/*
+ * LED-System: Lights
+ *
+ * Controls the LED Lights based on the active modes and zones.
+ */
+
 // Settings
 int s_m1_z1_stepdelay = 30; // Flash speed
 int s_m1_z1_stepcount = 15;
