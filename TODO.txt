@@ -1,0 +1,16 @@
+To Do:
+
+*Add Zone #2. (pins 4, 5)
+
+*Add new flash patterns. (Crim will add txt files for them like mode1.txt)
+	Patterns will include 1v1 or "wigwag" and a both on/off (like car hazards)
+
+
+Bugs/Fixes:
+ 
+*Make all Zones and Modes defualt to "OFF"
+
+*When Mode is on, and a zone is turned off you can catch a light on.  
+	Make all pins in zone go low when zone turned to off.
+
+*Fix/Redo "FORD" logo.  (Crim will work on this)
