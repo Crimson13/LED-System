@@ -1,0 +1,18 @@
+STEP 0
+-Red Light on
+-Wait 75ms
+STEP 1
+-Red Light off
+-Wait 75ms
+STEP 2
+-blue Light on
+-Wait 75ms
+STEP 3
+-blue Light off
+-Wait 75ms
+STEP 4
+-Red Light on
+-Wait 75ms
+STEP 5
+-Red Light off
+-Wait 75ms
