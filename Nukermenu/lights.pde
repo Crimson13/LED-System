@@ -91,6 +91,28 @@ void m1_dostep(byte z1, byte z2, byte z3, int timediff)
   }
 }
 
+void m1_reset(int zone)
+{
+  switch(zone)
+  {
+    case 1:
+      digitalWrite(s_m1_z1_redpin, LOW);
+      digitalWrite(s_m1_z1_bluepin, LOW);
+      break;
+    case 2:
+      break; /* Nothing yet... */
+    case 3:
+      break; /* Nothing yet... */
+    case 0:
+      m1_step = 0;
+      m1_timeleft = 0;
+      m1_reset(1);
+      m1_reset(2);
+      m1_reset(3);
+      break;
+  }
+}
+
 void m2_dostep(byte z1, byte z2, byte z3, int timediff)
 {
   m2_timeleft -= timediff; // Update time remaining
@@ -106,6 +128,26 @@ void m2_dostep(byte z1, byte z2, byte z3, int timediff)
       
     // Reset time remaining till next step
     m2_timeleft = s_m2_stepdelay;
+  }
+}
+
+void m2_reset(int zone)
+{
+  switch(zone)
+  {
+    case 1:
+      break; /* Nothing yet... */
+    case 2:
+      break; /* Nothing yet... */
+    case 3:
+      break; /* Nothing yet... */
+    case 0:
+      m2_step = 0;
+      m2_timeleft = 0;
+      m2_reset(1);
+      m2_reset(2);
+      m2_reset(3);
+      break;
   }
 }
 
@@ -125,5 +167,33 @@ void m3_dostep(byte z1, byte z2, byte z3, int timediff)
     // Reset time remaining till next step
     m3_timeleft = s_m3_stepdelay;
   }
+}
+
+void m3_reset(int zone)
+{
+  switch(zone)
+  {
+    case 1:
+      break; /* Nothing yet... */
+    case 2:
+      break; /* Nothing yet... */
+    case 3:
+      break; /* Nothing yet... */
+    case 0:
+      m3_step = 0;
+      m3_timeleft = 0;
+      m3_reset(1);
+      m3_reset(2);
+      m2_reset(3);
+      break;
+  }
+}
+
+/* Reset the zone on all modes at once */
+void zone_reset(int zone)
+{
+  m1_reset(zone);
+  m2_reset(zone);
+  m3_reset(zone);
 }
 

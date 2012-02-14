@@ -255,32 +255,50 @@ void menuUsed(ItemUseEvent event)
   // Turn things on or off
   if (event == &SubModes1) { 
     if (m1 == 0) { m1 = 1; }
-    else { m1 = 0; }
+    else { 
+      m1 = 0;
+      m1_reset(0); // Reset lights
+    }
     ShowModeItem(1);
   }
   else if (event == &SubModes2) {
     if (m2 == 0) { m2 = 1; }
-    else { m2 = 0; }
+    else { 
+      m2 = 0;
+      m2_reset(0); // Reset lights
+    }
     ShowModeItem(2);
   }
   else if (event == &SubModes3) {
     if (m3 == 0) { m3 = 1; }
-    else { m3 = 0; }
+    else { 
+      m3 = 0;
+      m3_reset(0); // Reset lights
+    }
     ShowModeItem(3);
   }
   else if (event == &SubZones1) {
     if (z1 == 0) { z1 = 1; }
-    else { z1 = 0; }
+    else { 
+      z1 = 0;
+      zone_reset(1); // Reset lights
+    }
     ShowZoneItem(1);
   }
   else if (event == &SubZones2) {
     if (z2 == 0) { z2 = 1; }
-    else { z2 = 0; }
+    else { 
+      z2 = 0;
+      zone_reset(2); // Reset lights
+    }
     ShowZoneItem(2);
   }
   else if (event == &SubZones3) {
     if (z3 == 0) { z3 = 1; }
-    else { z3 = 0; }
+    else { 
+      z3 = 0;
+      zone_reset(3); // Reset lights
+    }
     ShowZoneItem(3);
   }
   else { display("Error: Unknown or invalid selection"); }
