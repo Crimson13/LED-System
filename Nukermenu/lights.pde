@@ -5,10 +5,12 @@
  */
 
 // Settings
-int s_m1_stepdelay = 75; // Temp Note: Crim lowered this to 30 on the old system.
+int s_m1_stepdelay = 75;
 int s_m1_stepcount = 15;
 int s_m1_z1_redpin = 2;
 int s_m1_z1_bluepin = 3;
+int s_m1_z2_redpin = 4;
+int s_m1_z2_bluepin = 5;
 int s_m2_stepdelay = 99;
 int s_m2_stepcount = 99;
 int s_m3_stepdelay = 99;
@@ -27,6 +29,8 @@ void setup_li()
 {
   pinMode(s_m1_z1_bluepin, OUTPUT);
   pinMode(s_m1_z1_redpin, OUTPUT);
+  pinMode(s_m1_z2_bluepin, OUTPUT);
+  pinMode(s_m1_z2_redpin, OUTPUT);
   
   // Default to off
   m1_reset(0);
@@ -54,7 +58,7 @@ void m1_dostep(byte z1, byte z2, byte z3, int timediff)
       case 4:
         // Red Light On
         if (z1) digitalWrite(s_m1_z1_redpin, HIGH);
-        if (z2) { /* Nothing yet... */ } 
+        if (z2) digitalWrite(s_m1_z2_redpin, HIGH);
         if (z3) { /* Nothing yet... */ } 
         break;
       case 1:
@@ -62,15 +66,15 @@ void m1_dostep(byte z1, byte z2, byte z3, int timediff)
       case 5:
         // Red Light Off
         if (z1) digitalWrite(s_m1_z1_redpin, LOW);
-        if (z2) { /* Nothing yet... */ } 
+        if (z2) digitalWrite(s_m1_z2_redpin, LOW);
         if (z3) { /* Nothing yet... */ } 
         break;
       case 8:
       case 10:
       case 12:
         // Blue Light On
-        if (z1) digitalWrite(s_m1_z1_bluepin, HIGH); // turn the blue light on
-        if (z2) { /* Nothing yet... */ } 
+        if (z1) digitalWrite(s_m1_z1_bluepin, HIGH);
+        if (z2) digitalWrite(s_m1_z2_bluepin, HIGH);
         if (z3) { /* Nothing yet... */ } 
         break;
       case 9:
@@ -78,7 +82,7 @@ void m1_dostep(byte z1, byte z2, byte z3, int timediff)
       case 13:
         // Blue Light Off
         if (z1) digitalWrite(s_m1_z1_bluepin, LOW);
-        if (z2) { /* Nothing yet... */ } 
+        if (z2) digitalWrite(s_m1_z2_bluepin, LOW);
         if (z3) { /* Nothing yet... */ } 
         break;
       case 6:
@@ -105,7 +109,9 @@ void m1_reset(int zone)
       digitalWrite(s_m1_z1_bluepin, LOW);
       break;
     case 2:
-      break; /* Nothing yet... */
+      digitalWrite(s_m1_z2_redpin, LOW);
+      digitalWrite(s_m1_z2_bluepin, LOW);
+      break;
     case 3:
       break; /* Nothing yet... */
     case 0:

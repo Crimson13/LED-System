@@ -1,7 +1,5 @@
 To Do:
 
-*Add Zone #2. (pins 4, 5)
-
 *Add new flash patterns. (Crim will add txt files for them like mode1.txt)
 	Patterns will include 1v1 or "wigwag" and a both on/off (like car hazards)
 
