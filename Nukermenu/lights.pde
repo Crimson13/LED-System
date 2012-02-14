@@ -27,6 +27,11 @@ void setup_li()
 {
   pinMode(s_m1_z1_bluepin, OUTPUT);
   pinMode(s_m1_z1_redpin, OUTPUT);
+  
+  // Default to off
+  m1_reset(0);
+  m2_reset(0);
+  m3_reset(0);
 }
 
 void loop_li(byte m1, byte m2, byte m3, byte z1, byte z2, byte z3)

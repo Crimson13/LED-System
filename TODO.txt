@@ -7,7 +7,5 @@ To Do:
 
 
 Bugs/Fixes:
- 
-*Make all Zones and Modes defualt to "OFF"
 
 *Fix/Redo "FORD" logo.  (Crim will work on this)
