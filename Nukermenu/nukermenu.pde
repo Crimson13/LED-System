@@ -256,7 +256,11 @@ void menuUsed(ItemUseEvent event)
   #endif
   // Turn things on or off
   if (event == &SubModes1) { 
-    if (m1 == 0) { m1 = 1; }
+    if (m1 == 0) { 
+      m1 = 1;
+      m2 = 0;
+      m3 = 0;
+    }
     else { 
       m1 = 0;
       reset_zone(0); // Reset lights
@@ -264,7 +268,11 @@ void menuUsed(ItemUseEvent event)
     ShowModeItem(1);
   }
   else if (event == &SubModes2) {
-    if (m2 == 0) { m2 = 1; }
+    if (m2 == 0) { 
+      m1 = 0;
+      m2 = 1;
+      m3 = 0;
+    }
     else { 
       m2 = 0;
       reset_zone(0); // Reset lights
@@ -272,7 +280,11 @@ void menuUsed(ItemUseEvent event)
     ShowModeItem(2);
   }
   else if (event == &SubModes3) {
-    if (m3 == 0) { m3 = 1; }
+    if (m3 == 0) {
+      m1 = 0;
+      m2 = 0;
+      m3 = 1;
+    }
     else { 
       m3 = 0;
       reset_zone(0); // Reset lights
