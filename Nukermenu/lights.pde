@@ -38,8 +38,7 @@ void setup_li()
   pinMode(s_z2_bluepin, OUTPUT);
   pinMode(s_z2_redpin, OUTPUT);
   
-  // Default to off
-  zone_reset(0); // Not the intentended use of this function, but it works 0=)
+  reset_zone(0,1); // Force a full reset on all light zones so they start off
   
   display("Lights Ready");
 }
@@ -216,87 +215,40 @@ void m3_dostep(byte z1, byte z2, byte z3, int timediff)
   }
 }
 
-/* Reset mode lights to default settings based on given zone, or 0 for all zones. */
-void m1_reset(int zone)
+/* Reset the pins to offfor the given zone. 0 for all, force to turn them on first */
+void reset_zone(int zone) { return reset_zone(zone, 0); }
+void reset_zone(int zone, byte force)
 {
   #if DEBUG_RST_DIS
-  Serial.print("Reset called. Mode: 1 Zone: "); Serial.println(zone);
+  Serial.print("Reset called. Zone: "); Serial.print(zone);
+  Serial.print(" Force: ");  Serial.println((byte)force,DEC);
   #endif
-  switch(zone)
-  {
+  switch(zone) {
+    case 0:
+      reset_zone(1, force);
+      reset_zone(2, force);
+      reset_zone(3, force);
+      break;
     case 1:
+      if (force) {
+        digitalWrite(s_z1_redpin, HIGH);
+        digitalWrite(s_z1_bluepin, HIGH);
+      }
       digitalWrite(s_z1_redpin, LOW);
       digitalWrite(s_z1_bluepin, LOW);
       break;
     case 2:
+      if (force) {
+        digitalWrite(s_z2_redpin, LOW);
+        digitalWrite(s_z2_bluepin, LOW);
+      }
       digitalWrite(s_z2_redpin, LOW);
       digitalWrite(s_z2_bluepin, LOW);
       break;
     case 3:
-      break; /* Nothing yet... */
-    case 0:
-      m1_step = 0;
-      m1_timeleft = 0;
-      m1_reset(1);
-      m1_reset(2);
-      m1_reset(3);
+      if (force) {
+      }
+      /* Nothing yet */
       break;
   }
-}
-
-void m2_reset(int zone)
-{
-  #if DEBUG_RST_DIS
-  Serial.print("Reset called. Mode: 2 Zone: "); Serial.println(zone);
-  #endif
-  switch(zone)
-  {
-    case 1:
-      break; /* Nothing yet... */
-    case 2:
-      break; /* Nothing yet... */
-    case 3:
-      break; /* Nothing yet... */
-    case 0:
-      m2_step = 0;
-      m2_timeleft = 0;
-      m2_reset(1);
-      m2_reset(2);
-      m2_reset(3);
-      break;
-  }
-}
-
-void m3_reset(int zone)
-{
-  #if DEBUG_RST_DIS
-  Serial.print("Reset called. Mode: 3 Zone: "); Serial.println(zone);
-  #endif
-  switch(zone)
-  {
-    case 1:
-      break; /* Nothing yet... */
-    case 2:
-      break; /* Nothing yet... */
-    case 3:
-      break; /* Nothing yet... */
-    case 0:
-      m3_step = 0;
-      m3_timeleft = 0;
-      m3_reset(1);
-      m3_reset(2);
-      m3_reset(3);
-      break;
-  }
-}
-
-/* Reset the given zone on all modes at once */
-void zone_reset(int zone)
-{
-  #if DEBUG_RST_DIS
-  Serial.print("Reset called. Mode: 0 Zone: "); Serial.println(zone);
-  #endif
-  m1_reset(zone);
-  m2_reset(zone);
-  m3_reset(zone);
 }

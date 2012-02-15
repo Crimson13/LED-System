@@ -259,7 +259,7 @@ void menuUsed(ItemUseEvent event)
     if (m1 == 0) { m1 = 1; }
     else { 
       m1 = 0;
-      m1_reset(0); // Reset lights
+      reset_zone(0); // Reset lights
     }
     ShowModeItem(1);
   }
@@ -267,7 +267,7 @@ void menuUsed(ItemUseEvent event)
     if (m2 == 0) { m2 = 1; }
     else { 
       m2 = 0;
-      m2_reset(0); // Reset lights
+      reset_zone(0); // Reset lights
     }
     ShowModeItem(2);
   }
@@ -275,7 +275,7 @@ void menuUsed(ItemUseEvent event)
     if (m3 == 0) { m3 = 1; }
     else { 
       m3 = 0;
-      m3_reset(0); // Reset lights
+      reset_zone(0); // Reset lights
     }
     ShowModeItem(3);
   }
@@ -283,7 +283,7 @@ void menuUsed(ItemUseEvent event)
     if (z1 == 0) { z1 = 1; }
     else { 
       z1 = 0;
-      zone_reset(1); // Reset lights
+      reset_zone(1); // Reset lights
     }
     ShowZoneItem(1);
   }
@@ -291,7 +291,7 @@ void menuUsed(ItemUseEvent event)
     if (z2 == 0) { z2 = 1; }
     else { 
       z2 = 0;
-      zone_reset(2); // Reset lights
+      reset_zone(2); // Reset lights
     }
     ShowZoneItem(2);
   }
@@ -299,7 +299,7 @@ void menuUsed(ItemUseEvent event)
     if (z3 == 0) { z3 = 1; }
     else { 
       z3 = 0;
-      zone_reset(3); // Reset lights
+      reset_zone(3); // Reset lights
     }
     ShowZoneItem(3);
   }
