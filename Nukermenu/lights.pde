@@ -127,8 +127,9 @@ void m2_dostep(byte z1, byte z2, byte z3, int timediff)
   Serial.print("timediff: "); Serial.println(timediff);
   #endif
   
-  if (m3_timeleft <= 0) {
-    switch (m3_step) {
+  m2_timeleft -= timediff; // Update time remaining
+  if (m2_timeleft <= 0) {
+    switch (m2_step) {
       case 0:
         // Red Light on
         if (z1) digitalWrite(s_z1_redpin, HIGH);
@@ -157,8 +158,8 @@ void m2_dostep(byte z1, byte z2, byte z3, int timediff)
         break; /* Nothing yet... */
     }
     // If we did the last step, start over, otherwise increment step count.
-    if (m3_step > s_m3_stepcount) m3_step = 0;
-    else m3_step++;
+    if (m2_step > s_m2_stepcount) m2_step = 0;
+    else m2_step++;
       
     // Reset time remaining till next step
     m2_timeleft = s_m2_stepdelay;
@@ -184,22 +185,22 @@ void m3_dostep(byte z1, byte z2, byte z3, int timediff)
         // Both lights on
         if (z1) {
           digitalWrite(s_z1_redpin, HIGH);
-          digitalWrite(s_z1_redpin, LOW);
+          digitalWrite(s_z1_bluepin, HIGH);
         }
         if (z2) {
           digitalWrite(s_z2_redpin, HIGH);
-          digitalWrite(s_z2_redpin, LOW);
+          digitalWrite(s_z2_bluepin, HIGH);
         }
         if (z3) { /* Nothing yet... */ }
         break;
       case 1:
         // Both lights off
         if (z1) {
-          digitalWrite(s_z1_bluepin, HIGH);
+          digitalWrite(s_z1_redpin, LOW);
           digitalWrite(s_z1_bluepin, LOW);
         }
         if (z2) {
-          digitalWrite(s_z2_bluepin, HIGH);
+          digitalWrite(s_z2_redpin, LOW);
           digitalWrite(s_z2_bluepin, LOW);
         }
         if (z3) { /* Nothing yet... */ } 
