@@ -1,9 +1,10 @@
 To Do:
 
-*Add new flash patterns. (Crim will add txt files for them like mode1.txt)
-	Patterns will include 1v1 or "wigwag" and a both on/off (like car hazards)
-
+*Possibly begin work on being able to mix zones and modes.  
+	Need to discuss menu layout for this.
 
 Bugs/Fixes:
 
 *Fix/Redo "FORD" logo.  (Crim will work on this)
+
+
