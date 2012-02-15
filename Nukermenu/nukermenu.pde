@@ -167,7 +167,7 @@ void ShowZoneItem(const int zone)
 void loop()
 {
   // Have the light script take a step
-  loop_li(z1,z2,z3,m1,m2,m3);
+  loop_li(m1,m2,m3,z1,z2,z3);
   // Process menu movement
   switch (loop_nc()) {
     case 0: // Center
