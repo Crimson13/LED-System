@@ -13,14 +13,14 @@
 // Settings
 int s_m1_stepdelay = 75;
 int s_m1_stepcount = 15;
-int s_m1_z1_redpin = 2;
-int s_m1_z1_bluepin = 3;
-int s_m1_z2_redpin = 4;
-int s_m1_z2_bluepin = 5;
-int s_m2_stepdelay = 99;
-int s_m2_stepcount = 99;
-int s_m3_stepdelay = 99;
-int s_m3_stepcount = 99;
+int s_m2_stepdelay = 75;
+int s_m2_stepcount = 5;
+int s_m3_stepdelay = 75;
+int s_m3_stepcount = 1;
+int s_z1_redpin = 2;
+int s_z1_bluepin = 3;
+int s_z2_redpin = 4;
+int s_z2_bluepin = 5;
 
 // Progress
 int lasttime = 0;
@@ -33,10 +33,10 @@ int m3_timeleft = 0;
 
 void setup_li()
 {
-  pinMode(s_m1_z1_bluepin, OUTPUT);
-  pinMode(s_m1_z1_redpin, OUTPUT);
-  pinMode(s_m1_z2_bluepin, OUTPUT);
-  pinMode(s_m1_z2_redpin, OUTPUT);
+  pinMode(s_z1_bluepin, OUTPUT);
+  pinMode(s_z1_redpin, OUTPUT);
+  pinMode(s_z2_bluepin, OUTPUT);
+  pinMode(s_z2_redpin, OUTPUT);
   
   // Default to off
   zone_reset(0); // Not the intentended use of this function, but it works 0=)
@@ -73,32 +73,32 @@ void m1_dostep(byte z1, byte z2, byte z3, int timediff)
       case 2:
       case 4:
         // Red Light On
-        if (z1) digitalWrite(s_m1_z1_redpin, HIGH);
-        if (z2) digitalWrite(s_m1_z2_redpin, HIGH);
+        if (z1) digitalWrite(s_z1_redpin, HIGH);
+        if (z2) digitalWrite(s_z2_redpin, HIGH);
         if (z3) { /* Nothing yet... */ } 
         break;
       case 1:
       case 3:
       case 5:
         // Red Light Off
-        if (z1) digitalWrite(s_m1_z1_redpin, LOW);
-        if (z2) digitalWrite(s_m1_z2_redpin, LOW);
+        if (z1) digitalWrite(s_z1_redpin, LOW);
+        if (z2) digitalWrite(s_z2_redpin, LOW);
         if (z3) { /* Nothing yet... */ } 
         break;
       case 8:
       case 10:
       case 12:
         // Blue Light On
-        if (z1) digitalWrite(s_m1_z1_bluepin, HIGH);
-        if (z2) digitalWrite(s_m1_z2_bluepin, HIGH);
+        if (z1) digitalWrite(s_z1_bluepin, HIGH);
+        if (z2) digitalWrite(s_z2_bluepin, HIGH);
         if (z3) { /* Nothing yet... */ } 
         break;
       case 9:
       case 11:
       case 13:
         // Blue Light Off
-        if (z1) digitalWrite(s_m1_z1_bluepin, LOW);
-        if (z2) digitalWrite(s_m1_z2_bluepin, LOW);
+        if (z1) digitalWrite(s_z1_bluepin, LOW);
+        if (z2) digitalWrite(s_z2_bluepin, LOW);
         if (z3) { /* Nothing yet... */ } 
         break;
       case 6:
@@ -128,15 +128,38 @@ void m2_dostep(byte z1, byte z2, byte z3, int timediff)
   Serial.print("timediff: "); Serial.println(timediff);
   #endif
   
-  m2_timeleft -= timediff; // Update time remaining
-  if (m2_timeleft <= 0) {
-    switch (m2_step) {
+  if (m3_timeleft <= 0) {
+    switch (m3_step) {
+      case 0:
+        // Red Light on
+        if (z1) digitalWrite(s_z1_redpin, HIGH);
+        if (z2) digitalWrite(s_z2_redpin, HIGH);
+        if (z3) { /* Nothing yet... */ } 
+        break;
+      case 1:
+        // Red Light off
+        if (z1) digitalWrite(s_z1_redpin, LOW);
+        if (z2) digitalWrite(s_z2_redpin, LOW);
+        if (z3) { /* Nothing yet... */ } 
+        break;
+      case 2:
+        // Blue Light on
+        if (z1) digitalWrite(s_z1_bluepin, HIGH);
+        if (z2) digitalWrite(s_z2_bluepin, HIGH);
+        if (z3) { /* Nothing yet... */ } 
+        break;
+      case 3:
+        // Blue Light off
+        if (z1) digitalWrite(s_z1_bluepin, LOW);
+        if (z2) digitalWrite(s_z2_bluepin, LOW);
+        if (z3) { /* Nothing yet... */ } 
+        break;
       default:
         break; /* Nothing yet... */
     }
     // If we did the last step, start over, otherwise increment step count.
-    if (m2_step > s_m2_stepcount) m2_step = 0;
-    else m2_step++;
+    if (m3_step > s_m3_stepcount) m3_step = 0;
+    else m3_step++;
       
     // Reset time remaining till next step
     m2_timeleft = s_m2_stepdelay;
@@ -158,8 +181,31 @@ void m3_dostep(byte z1, byte z2, byte z3, int timediff)
   m3_timeleft -= timediff; // Update time remaining
   if (m3_timeleft <= 0) {
     switch (m3_step) {
-      default:
-        break; /* Nothing yet... */
+      case 0:
+        // Both lights on
+        if (z1) {
+          digitalWrite(s_z1_redpin, HIGH);
+          digitalWrite(s_z1_redpin, LOW);
+        }
+        if (z2) {
+          digitalWrite(s_z2_redpin, HIGH);
+          digitalWrite(s_z2_redpin, LOW);
+        }
+        if (z3) { /* Nothing yet... */ }
+        break;
+      case 1:
+        // Both lights off
+        if (z1) {
+          digitalWrite(s_z1_bluepin, HIGH);
+          digitalWrite(s_z1_bluepin, LOW);
+        }
+        if (z2) {
+          digitalWrite(s_z2_bluepin, HIGH);
+          digitalWrite(s_z2_bluepin, LOW);
+        }
+        if (z3) { /* Nothing yet... */ } 
+
+        break;
     }
     // If we did the last step, start over, otherwise increment step count.
     if (m3_step > s_m3_stepcount) m3_step = 0;
@@ -179,12 +225,12 @@ void m1_reset(int zone)
   switch(zone)
   {
     case 1:
-      digitalWrite(s_m1_z1_redpin, LOW);
-      digitalWrite(s_m1_z1_bluepin, LOW);
+      digitalWrite(s_z1_redpin, LOW);
+      digitalWrite(s_z1_bluepin, LOW);
       break;
     case 2:
-      digitalWrite(s_m1_z2_redpin, LOW);
-      digitalWrite(s_m1_z2_bluepin, LOW);
+      digitalWrite(s_z2_redpin, LOW);
+      digitalWrite(s_z2_bluepin, LOW);
       break;
     case 3:
       break; /* Nothing yet... */
