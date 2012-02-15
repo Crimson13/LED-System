@@ -8,24 +8,23 @@
 #include <Wire.h>
 #include "nunchuck_funcs.h"
 
-byte ncdebug=0;
-
-int lastpos=0;
+// Debug Defintions (Set at compile time)
+#define DEBUG_NC_POS 0 // Print nunchuck position information to display on change
+#define DEBUG_NC_VER 0 // Print raw nunchuck information to serial every loop (WARNING: This is very spammy.)
 
 byte accx,accy,zbut,cbut;
 int ledPin = 13;
+int lastpos = 0;
 int th = 60; // Threshold
-
 
 void setup_nc()
 {
-  
   nunchuck_setpowerpins();
   nunchuck_init(); // send the initilization handshake
   nunchuck_calibrate(); 
   numchuck_manual_calibrate(123,132);
     
-  if (ncdebug == 1) Serial.print("Nunchuck ready\n");
+  display("Nunchuck Ready");
 }
 
 byte nc_z() { return zbut; }
@@ -53,32 +52,44 @@ int loop_nc()
 
   if (x == 0) {
     if (y == 0) {
-      if (ncdebug == 1) Serial.println("center");
+      #if DEBUG_NC_POS
+      display("pos: center");
+      #endif
       return lastpos = 0;
     }
     else if (y == -1) {
-      if (ncdebug == 1) Serial.println("up");
+      #if DEBUG_NC_POS
+      display("pos: up");
+      #endif
       return lastpos = 1;
     }
     else if (y == 1) {
-      if (ncdebug == 1) Serial.println("down");
+      #if DEBUG_NC_POS
+      display("pos: down");
+      #endif
       return lastpos = 3;  
     }
   }
   else if (x == -1) {
     if (y == 0) {
-      if (ncdebug == 1) Serial.println("left");
+      #if DEBUG_NC_POS
+      display("pos: left");
+      #endif
       return lastpos = 4;
     } 
     else if (y == -1) {
-      if (ncdebug == 1) Serial.println("upleft");
+      #if DEBUG_NC_POS
+      display("pos: upleft");
+      #endif
       // If the last pos was either then return the lastpos,
       // otherwise set to the up/down rather than left/right.
       if ((lastpos == 1) || (lastpos == 4)) return lastpos;
       else return lastpos = 1;
     } 
     else if (y == 1) {
-      if (ncdebug == 1) Serial.println("downleft");
+      #if DEBUG_NC_POS
+      display("pos: downleft");
+      #endif
       // If the last pos was either then return the lastpos,
       // otherwise set to the up/down rather than left/right.
       if ((lastpos == 3) || (lastpos == 4)) return lastpos;
@@ -87,18 +98,24 @@ int loop_nc()
   } 
   else if (x == 1) {
     if (y == 0) {
-      if (ncdebug == 1) Serial.println("right");
+      #if DEBUG_NC_POS
+      display("pos: right");
+      #endif
       return lastpos = 2;
     } 
     else if (y == -1) {
-      if (ncdebug == 1) Serial.println("upright");
+      #if DEBUG_NC_POS
+      display("pos: upright");
+      #endif
       // If the last pos was either then return the lastpos,
       // otherwise set to the up/down rather than left/right.
       if ((lastpos == 1) || (lastpos == 2)) return lastpos;
       else return lastpos = 1;
     } 
     else if (y == 1) {
-      if (ncdebug == 1) Serial.println("downright");
+      #if DEBUG_NC_POS
+      display("pos: downright");
+      #endif
       // If the last pos was either then return the lastpos,
       // otherwise set to the up/down rather than left/right.
       if ((lastpos == 3) || (lastpos == 2)) return lastpos;
@@ -106,15 +123,19 @@ int loop_nc()
     }
   } 
   else {
-    if (ncdebug == 1) Serial.println("error");
+    #if DEBUG_NC_POS
+    display("pos: error");
+    #endif
     return lastpos = -1;
   }
 
-            
-  // Serial.print("accx: "); Serial.print((byte)accx,DEC);
-  //Serial.print("\taccy: "); Serial.print((byte)accy,DEC);
-  //Serial.print("\tzbut: "); Serial.print((byte)zbut,DEC);
-  //Serial.print("\tcbut: "); Serial.println((byte)cbut,DEC);
-  //nunchuck_print_data();
+  #if DEBUG_NC_VER
+  Serial.print("NCDebug>>");
+  Serial.print("accx: "); Serial.print((byte)accx,DEC);
+  Serial.print("\taccy: ");Serial.print((byte)accy,DEC);
+  Serial.print("\tzbut: "); Serial.print((byte)zbut,DEC);
+  Serial.print("\tcbut: "); Serial.println((byte)cbut,DEC);
+  nunchuck_print_data();
+  #endif
 }
 

@@ -20,6 +20,8 @@ void setup_cl() {
   lcd.createChar(2, logo2);
   lcd.createChar(3, logo3);
   lcd.createChar(4, logo4);
+  
+  display("CustomLogo Ready");
 }
 
 // Display the custom logo with text

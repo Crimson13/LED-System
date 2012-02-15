@@ -66,13 +66,15 @@ void setup()
     menu.select(0);
     subModes.select(0);
     subZones.select(0);
+    display("Menu Ready");
     
-    setup_nc(); // Initialize NukerChuck
-    setup_li(); // Initialize Lights
-    setup_cl(); // Initialize the Custom Logo
+    // Initialize other modules
+    setup_nc(); // Nunchuck (NukerChuck)
+    setup_li(); // Lights
+    setup_cl(); // Custom Logo
     
     display("Setup Complete");
-    displaylogo("Ready");
+    displaylogo("Ready"); // Display custom logo
 }
 
 /* Following functions prevent duplicate inputs by holding down the button */
