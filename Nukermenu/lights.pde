@@ -107,7 +107,7 @@ void m1_dostep(byte z1, byte z2, byte z3, int timediff)
           break; // Intentional extra delay
     }
     // If we did the last step, start over, otherwise increment step count.
-    if (m1_step > s_m1_stepcount) m1_step = 0;
+    if (m1_step >= s_m1_stepcount) m1_step = 0;
     else m1_step++;
       
     // Reset time remaining till next step
@@ -158,7 +158,7 @@ void m2_dostep(byte z1, byte z2, byte z3, int timediff)
         break; /* Nothing yet... */
     }
     // If we did the last step, start over, otherwise increment step count.
-    if (m2_step > s_m2_stepcount) m2_step = 0;
+    if (m2_step >= s_m2_stepcount) m2_step = 0;
     else m2_step++;
       
     // Reset time remaining till next step
@@ -208,7 +208,7 @@ void m3_dostep(byte z1, byte z2, byte z3, int timediff)
         break;
     }
     // If we did the last step, start over, otherwise increment step count.
-    if (m3_step > s_m3_stepcount) m3_step = 0;
+    if (m3_step >= s_m3_stepcount) m3_step = 0;
     else m3_step++;
       
     // Reset time remaining till next step
