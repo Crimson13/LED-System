@@ -3,6 +3,12 @@ To Do:
 *Possibly begin work on being able to mix zones and modes.  
 	Need to discuss menu layout for this.
 
+*Change how we talk to the LCD to "i2C" format.
+	Both the LCD and nunchuck will use same pins, this opens up more pins for other use. (http://www.ladyada.net/products/i2cspilcdbackpack)
+
+*After LCD is changed to i2C, add RGB led pods.
+	New sudo "zones" will be made for this.  (http://www.ladyada.net/products/pixel20mm/)
+
 Bugs/Fixes:
 
 *Fix/Redo "FORD" logo.  (Crim will work on this)
