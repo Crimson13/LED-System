@@ -7,7 +7,7 @@ To Do:
 	Both the LCD and nunchuck will use same pins, this opens up more pins for other use. (http://www.ladyada.net/products/i2cspilcdbackpack)
 
 *After LCD is changed to i2C, add RGB led pods.
-	New sudo "zones" will be made for this.  (http://www.ladyada.net/products/pixel20mm/)
+	New pseudo "zones" will be made for this.  (http://www.ladyada.net/products/pixel20mm/)
 
 Bugs/Fixes:
 
