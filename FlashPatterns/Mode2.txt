@@ -1,8 +1,12 @@
 STEP 0
 -Red Light on
--Blue Light off
 -Wait 75ms
 STEP 1
 -Red Light off
--Blue Light on
+-Wait 75ms
+STEP 2
+-blue Light on
+-Wait 75ms
+STEP 3
+-blue Light off
 -Wait 75ms
