@@ -10,8 +10,3 @@ To Do:
 	New pseudo "zones" will be made for this.  (http://www.ladyada.net/products/pixel20mm/)
 
 Bugs/Fixes:
-
-*Fix/Redo "FORD" logo.  (Crim will work on this)
-
-
-test
