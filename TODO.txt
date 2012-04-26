@@ -1,5 +1,8 @@
 To Do:
 
+*Rename zones to location on car.
+	IE: Zone 1 = Front, Zone 2 = Rear and so on.
+
 *Possibly begin work on being able to mix zones and modes.  
 	Need to discuss menu layout for this.
 
