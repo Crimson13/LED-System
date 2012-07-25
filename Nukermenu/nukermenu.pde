@@ -42,12 +42,16 @@ Menu menu = Menu(menuUsed,menuChanged);
       SubMenuItem SubZones3 = SubMenuItem();
 
 // Prepare the LiquidCrystal Library
-LiquidCrystal lcd(7, 8, 9, 10, 11, 12);
+LiquidCrystal lcd(A0, A1, 12);
 
 // Setup: Ran when program is loaded.
 void setup()
 {
     Serial.begin(19200);
+    
+    // Set pins A0 and A1 to use digital output
+    pinMode(A0, OUTPUT);
+    pinMode(A1, OUTPUT);
     
     // Initialize the LCD
     lcd.begin(16, 2);

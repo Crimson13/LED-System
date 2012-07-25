@@ -8,6 +8,7 @@ Requirements:
 -------------
 * Arduino 0023
 * Menu Library 1.0 (http://arduino.cc/playground/Code/Menu)
+* Custom I2c/SPI LiquidCrystal Library (https://github.com/adafruit/LiquidCrystal)
 
 Acknowledgements:
 -----------------
