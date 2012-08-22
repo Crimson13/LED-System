@@ -1,0 +1,27 @@
+For now all colors can be yellow (full red and green)
+
+On ='s: -
+Off ='s: .
+
+Flash speeds can be taken from the other patterns we have for the ones we already do (wig wag1 + 2)  
+Speed for what we have for the matching pattern for wig wag1 could be used in most of the other patterns I think.
+
+
+
+FIll Right-  Begin at left most group and turn on the next one until entire strip is on and repeat.
+	-.........  --........ ---....... ----...... -----..... ------.... -------... --------.. ---------. ---------
+
+Fill Left-  Opposite as above.
+
+Mid to ouside-  Start in middle 2 groups and fill towards outside untie entire strip is on and repeat.
+	....--....  ...----...  ..------..  .--------.  -----------
+
+Wig Wag1- Flash left side, then right. Repeat.
+	-----..... .....-----
+
+Wig wag2- Flash left side 3 times quickly then right side quickly, repeat
+	-----..... .......... ------...... ......... -----..... ......... .....----- .......... .....----- .......... .....-----
+
+Alternating- Flash every-other group and then the others.
+	-.-.-.-.-. .-.-.-.-.-
+
