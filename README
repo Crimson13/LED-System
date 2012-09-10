@@ -9,6 +9,8 @@ Requirements:
 * Arduino 0023
 * Menu Library 1.0 (http://arduino.cc/playground/Code/Menu)
 * Custom I2c/SPI LiquidCrystal Library (https://github.com/adafruit/LiquidCrystal)
+* LPD6803 RGB Pixel Library (https://github.com/adafruit/LPD6803-RGB-Pixels)
+* TimerOne Library (http://code.google.com/p/arduino-timerone/)
 
 Acknowledgements:
 -----------------
