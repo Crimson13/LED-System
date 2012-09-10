@@ -8,7 +8,7 @@ int pixelMaxCPU = 50;
 
 // Pattern Setup
 int s_groupcount = 10;
-int s_m1_stepdelay = 75;
+int s_m1_stepdelay = 200;
 int s_m1_stepcount = 10;
 
 // Prepare the Pixel Strip Library
@@ -56,7 +56,7 @@ void m1_dostep(int timediff) {
             }
         }
         else {
-            setGroupColor(m1_step-1, 255, 255, 255);
+            setGroupColor(m1_step-1, 255, 255, 0);
         }
         
         // If we did the last step, start over, otherwise increment step count.
