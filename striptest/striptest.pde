@@ -35,6 +35,7 @@ void setGroupColor(int gnum, int r, int g, int b) {
     
     strip.setPixelColor(led, r, g, b);
     strip.setPixelColor(led+1, r, g, b);
+    strip.show();
 }
 
 // Main program loop
