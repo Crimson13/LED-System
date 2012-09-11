@@ -61,10 +61,11 @@ void resetStrip() {
 
 // Changes color of given group to given r/g/b vales.
 void setGroupColor(int gnum, int r, int g, int b) {
-    int led = pixelsPerGroup * gnum;
+    int start = pixelsPerGroup * gnum;
     
-    strip.setPixelColor(led, r, g, b);
-    strip.setPixelColor(led+1, r, g, b);
+    for (int p=start;p<(start+pixelsPerGroup); p++) {
+        strip.setPixelColor(p, r, g, b);
+    }
     strip.show();
 }
 
