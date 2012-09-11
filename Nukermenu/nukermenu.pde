@@ -27,6 +27,8 @@ byte m3=0;
 byte z1=0;
 byte z2=0;
 byte z3=0;
+byte s1=0;
+byte s2=0;
 
 // Prepare the menu
 Menu menu = Menu(menuUsed,menuChanged);
@@ -40,6 +42,10 @@ Menu menu = Menu(menuUsed,menuChanged);
       SubMenuItem SubZones1 = SubMenuItem();
       SubMenuItem SubZones2 = SubMenuItem();
       SubMenuItem SubZones3 = SubMenuItem();
+  MenuItem menuStrip = MenuItem();
+    SubMenu subStrip = SubMenu(menuChanged);
+      SubMenuItem SubStrip1 = SubMenuItem();
+      SubMenuItem SubStrip2 = SubMenuItem();
 
 // Prepare the LiquidCrystal Library
 LiquidCrystal lcd(A0, A1, 12);
@@ -67,6 +73,10 @@ void setup()
         subZones.addSubMenuItem(SubZones1);
         subZones.addSubMenuItem(SubZones2);
         subZones.addSubMenuItem(SubZones3);
+    menu.addMenuItem(menuStrip);
+      menuStrip.addSubMenu(subStrip);
+        subStrip.addSubMenuItem(SubStrip1);
+        subStrip.addSubMenuItem(SubStrip2);
     menu.select(0);
     subModes.select(0);
     subZones.select(0);
@@ -75,6 +85,7 @@ void setup()
     // Initialize other modules
     setup_nc(); // Nunchuck (NukerChuck)
     setup_li(); // Lights
+    setup_ls(); // Light Strip
     setup_cl(); // Custom Logo
     
     display("Setup Complete");
@@ -167,11 +178,29 @@ void ShowZoneItem(const int zone)
     else { display("Error: Invalid Zone Given!"); }
 }
 
+// Display the given Strip Mode and if its on or off
+void ShowStripItem(const int mode)
+{
+    if (mode == 1)
+    {
+        if (s1) { display("Fill Right - ON"); }
+        else { display("Fill Right - OFF"); }
+    }
+    else if (mode == 2)
+    {
+        if (s2) { display("Fill Left - ON"); }
+        else { display("Fill Left - OFF"); }
+    }
+    else { display("Error: Invalid Strip Mode Given!"); }
+}
+
 // Main program loop
 void loop()
 {
-  // Have the light script take a step
+  // Call loop functions in other modules as necessary so they can do their thing.
   loop_li(m1,m2,m3,z1,z2,z3);
+  loop_ls(s1,s2);
+  
   // Process menu movement
   switch (loop_nc()) {
     case 0: // Center
@@ -248,7 +277,10 @@ void menuChanged(ItemChangeEvent event)
   else if (event == &menuZones) { display("Zones"); }
   else if (event == &SubZones1) { ShowZoneItem(1); }
   else if (event == &SubZones2) { ShowZoneItem(2); }
-  else if (event == &SubZones3) { ShowZoneItem(3);; }
+  else if (event == &SubZones3) { ShowZoneItem(3); }
+  else if (event == &menuStrip) { display("Light Strip"); }
+  else if (event == &SubStrip1) { ShowStripItem(1); }
+  else if (event == &SubStrip1) { ShowStripItem(2); }
   else { display("Error: Unknown Menu Item"); }
 }
 
@@ -258,7 +290,7 @@ void menuUsed(ItemUseEvent event)
   #if DEBUG_EVT_TRG
   display("UseEvent Triggered");
   #endif
-  // Turn things on or off
+  // Mode Items
   if (event == &SubModes1) { 
     if (m1 == 0) { 
       m1 = 1;
@@ -295,6 +327,7 @@ void menuUsed(ItemUseEvent event)
     }
     ShowModeItem(3);
   }
+  // Zone Items
   else if (event == &SubZones1) {
     if (z1 == 0) { z1 = 1; }
     else { 
@@ -318,6 +351,30 @@ void menuUsed(ItemUseEvent event)
       reset_zone(3); // Reset lights
     }
     ShowZoneItem(3);
+  }
+  // Strip Items
+  if (event == &SubStrip1) { 
+    if (s1 == 0) {
+      s1 = 1;
+      s2 = 0;
+    }
+    else { 
+      s1 = 0;
+      resetStrip();
+    }
+    ShowStripItem(1);
+  }
+  // Strip Items
+  if (event == &SubStrip2) { 
+    if (s2 == 0) { 
+      s1 = 0;
+      s2 = 1;
+    }
+    else {
+      s2 = 0;
+      resetStrip();
+    }
+    ShowStripItem(2);
   }
   else { display("Error: Unknown or invalid selection"); }
 }

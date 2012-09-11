@@ -23,7 +23,7 @@ int s_z2_redpin = 4;
 int s_z2_bluepin = 5;
 
 // Progress
-int lasttime = 0;
+int li_lasttime = 0;
 int m1_step = 0;
 int m1_timeleft = 0;
 int m2_step = 0;
@@ -45,11 +45,11 @@ void setup_li()
 
 void loop_li(byte m1, byte m2, byte m3, byte z1, byte z2, byte z3)
 {
-  int diff = millis() - lasttime; // How much time has past since the last loop
+  int diff = millis() - li_lasttime; // How much time has past since the last loop
   if (m1) m1_dostep(z1, z2, z3, diff);
   if (m2) m2_dostep(z1, z2, z3, diff);
   if (m3) m3_dostep(z1, z2, z3, diff);
-  lasttime = millis(); // Record the time before returning
+  li_lasttime = millis(); // Record the time before returning
 }
 
 /* Progress the pattern for each mode */
