@@ -12,8 +12,8 @@
 #include <TimerOne.h>
  
 // Basic Strip Setup
-int dataPin = 2;
-int clockPin = 3;
+int dataPin = 10;
+int clockPin = 11;
 int pixelMaxCPU = 50;
 int pixelsPerGroup = 2;
 int pixelGroups = 10;

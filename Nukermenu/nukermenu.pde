@@ -226,6 +226,9 @@ void loop()
         else if (menu.getCurrentItem() == &menuZones) {
           if (canMenuChange()) subZones.up();
         }
+        else if (menu.getCurrentItem() == &menuStrip) {
+          if (canMenuChange()) subStrip.up();
+        }
       }
       break;
     case 3: // Down
@@ -244,6 +247,9 @@ void loop()
         }
         else if (menu.getCurrentItem() == &menuZones) {
           if (canMenuChange()) subZones.down();
+        }
+        else if (menu.getCurrentItem() == &menuStrip) {
+          if (canMenuChange()) subStrip.down();
         }
       }
       break;
@@ -280,7 +286,7 @@ void menuChanged(ItemChangeEvent event)
   else if (event == &SubZones3) { ShowZoneItem(3); }
   else if (event == &menuStrip) { display("Light Strip"); }
   else if (event == &SubStrip1) { ShowStripItem(1); }
-  else if (event == &SubStrip1) { ShowStripItem(2); }
+  else if (event == &SubStrip2) { ShowStripItem(2); }
   else { display("Error: Unknown Menu Item"); }
 }
 
@@ -353,7 +359,7 @@ void menuUsed(ItemUseEvent event)
     ShowZoneItem(3);
   }
   // Strip Items
-  if (event == &SubStrip1) { 
+  else if (event == &SubStrip1) { 
     if (s1 == 0) {
       s1 = 1;
       s2 = 0;
@@ -364,8 +370,7 @@ void menuUsed(ItemUseEvent event)
     }
     ShowStripItem(1);
   }
-  // Strip Items
-  if (event == &SubStrip2) { 
+  else if (event == &SubStrip2) { 
     if (s2 == 0) { 
       s1 = 0;
       s2 = 1;
