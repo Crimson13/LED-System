@@ -10,17 +10,19 @@
 #define DEBUG_STP_M2 0 // Print mode 2 step debug info to serial every loop. (WARNING: This is very spammy.)
 #define DEBUG_STP_M3 0 // Print mode 3 step debug info to serial every loop. (WARNING: This is very spammy.)
 
+// Pin Settings
+const int s_z1_redpin = 2;
+const int s_z1_bluepin = 3;
+const int s_z2_redpin = 4;
+const int s_z2_bluepin = 5;
+
 // Settings
-int s_m1_stepdelay = 75;
-int s_m1_stepcount = 15;
-int s_m2_stepdelay = 150;
-int s_m2_stepcount = 3;
-int s_m3_stepdelay = 250;
-int s_m3_stepcount = 1;
-int s_z1_redpin = 2;
-int s_z1_bluepin = 3;
-int s_z2_redpin = 4;
-int s_z2_bluepin = 5;
+const int s_m1_stepdelay = 75;
+const int s_m1_stepcount = 15;
+const int s_m2_stepdelay = 150;
+const int s_m2_stepcount = 3;
+const int s_m3_stepdelay = 250;
+const int s_m3_stepcount = 1;
 
 // Progress
 int li_lasttime = 0;
@@ -43,7 +45,7 @@ void setup_li()
   display("Lights Ready");
 }
 
-void loop_li(byte m1, byte m2, byte m3, byte z1, byte z2, byte z3)
+void loop_li(boolean m1, boolean m2, boolean m3, boolean z1, boolean z2, boolean z3)
 {
   int diff = millis() - li_lasttime; // How much time has past since the last loop
   if (m1) m1_dostep(z1, z2, z3, diff);
@@ -53,7 +55,7 @@ void loop_li(byte m1, byte m2, byte m3, byte z1, byte z2, byte z3)
 }
 
 /* Progress the pattern for each mode */
-void m1_dostep(byte z1, byte z2, byte z3, int timediff)
+void m1_dostep(boolean z1, boolean z2, boolean z3, int timediff)
 {
   #if DEBUG_STP_M1
   Serial.print("M1Debug>>");
@@ -115,7 +117,7 @@ void m1_dostep(byte z1, byte z2, byte z3, int timediff)
   }
 }
 
-void m2_dostep(byte z1, byte z2, byte z3, int timediff)
+void m2_dostep(boolean z1, boolean z2, boolean z3, int timediff)
 {
   #if DEBUG_STP_M2
   Serial.print("M2Debug>>");
@@ -166,7 +168,7 @@ void m2_dostep(byte z1, byte z2, byte z3, int timediff)
   }
 }
 
-void m3_dostep(byte z1, byte z2, byte z3, int timediff)
+void m3_dostep(boolean z1, boolean z2, boolean z3, int timediff)
 {
   #if DEBUG_STP_M2
   Serial.print("M2Debug>>");
@@ -218,11 +220,11 @@ void m3_dostep(byte z1, byte z2, byte z3, int timediff)
 
 /* Reset the pins to offfor the given zone. 0 for all, force to turn them on first */
 void reset_zone(int zone) { return reset_zone(zone, 0); }
-void reset_zone(int zone, byte force)
+void reset_zone(int zone, boolean force)
 {
   #if DEBUG_RST_DIS
   Serial.print("Reset called. Zone: "); Serial.print(zone);
-  Serial.print(" Force: ");  Serial.println((byte)force,DEC);
+  Serial.print(" Force: ");  Serial.println((boolean)force,DEC);
   #endif
   switch(zone) {
     case 0:

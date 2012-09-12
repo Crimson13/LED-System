@@ -12,10 +12,13 @@
 #define DEBUG_NC_POS 0 // Print nunchuck position information to serial (WARNING: This is very spammy.)
 #define DEBUG_NC_VER 0 // Print raw nunchuck information to serial every loop (WARNING: This is very spammy.)
 
-byte accx,accy,zbut,cbut;
-int ledPin = 13;
+// Settings
+const int th = 60; // Threshold
+
+// Internals 
+byte accx,accy;
+boolean zbut,cbut;
 int lastpos = 0;
-int th = 60; // Threshold
 
 void setup_nc()
 {
@@ -27,8 +30,8 @@ void setup_nc()
   display("Nunchuck Ready");
 }
 
-byte nc_z() { return zbut; }
-byte nc_c() { return cbut; }
+boolean nc_z() { return zbut; }
+boolean nc_c() { return cbut; }
 
 int loop_nc()
 {

@@ -11,28 +11,28 @@
 #include <LPD6803.h>
 #include <TimerOne.h>
  
-// Basic Strip Setup
-int dataPin = 10;
-int clockPin = 11;
-int pixelMaxCPU = 50;
-int pixelsPerGroup = 2;
-int pixelGroups = 10;
+// Pin Settings
+const int dataPin = 10;
+const int clockPin = 11;
 
 // Settings
-int s_p1_stepdelay = 200;
-int s_p1_stepcount = pixelGroups+1;
-int s_p2_stepdelay = 200;
-int s_p2_stepcount = pixelGroups+1;
-int s_p3_stepdelay = 200;
-int s_p3_stepcount = (pixelGroups / 2) + 1;
-int s_p4_stepdelay = 200;
-int s_p4_stepcount = 1;
-int s_p5_stepdelay = 200;
-int s_p5_stepcount = 11;
-int s_p6_stepdelay = 200;
-int s_p6_stepcount = 1;
+const int pixelMaxCPU = 50;
+const int pixelGroups = 10;
+const int pixelsPerGroup = 2;
+const int s_p1_stepdelay = 200;
+const int s_p1_stepcount = pixelGroups+1;
+const int s_p2_stepdelay = 200;
+const int s_p2_stepcount = pixelGroups+1;
+const int s_p3_stepdelay = 200;
+const int s_p3_stepcount = (pixelGroups / 2) + 1;
+const int s_p4_stepdelay = 200;
+const int s_p4_stepcount = 1;
+const int s_p5_stepdelay = 200;
+const int s_p5_stepcount = 11;
+const int s_p6_stepdelay = 200;
+const int s_p6_stepcount = 1;
 
-// Progress & Interals
+// Progress & Internals
 int ls_lasttime = 0;
 int p1_step = 0;
 int p1_timeleft = 0;
@@ -61,7 +61,7 @@ void setup_ls()
     display("Strip Ready");
 }
 
-void loop_ls(byte p1, byte p2, byte p3, byte p4, byte p5, byte p6) {
+void loop_ls(boolean p1, boolean p2, boolean p3,boolean p4, boolean p5,boolean p6) {
     int diff = millis() - ls_lasttime; // How much time has past since the last loop
     if (p1) p1_dostep(diff);
     if (p2) p2_dostep(diff);

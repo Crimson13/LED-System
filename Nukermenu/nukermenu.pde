@@ -15,24 +15,22 @@
 #define DEBUG_EVT_TRG 0   // Display when events are triggered
 #define DEBUG_NUM_POS 0   // Position of numchuck
 
-// Anti-Input Duplication Flags
-byte achange=0;
-byte zlast=0;
-byte clast=0;
-
-// On/off flags
-byte m1=0;
-byte m2=0;
-byte m3=0;
-byte z1=0;
-byte z2=0;
-byte z3=0;
-byte s1=0;
-byte s2=0;
-byte s3=0;
-byte s4=0;
-byte s5=0;
-byte s6=0;
+// Internal Flags
+boolean achange=0; // Anti-input Duplication
+boolean zlast=0;
+boolean clast=0;
+boolean m1=0; // Active Modes
+boolean m2=0;
+boolean m3=0;
+boolean z1=0; // Active Zones
+boolean z2=0;
+boolean z3=0;
+boolean s1=0; // Active Strip Patterns
+boolean s2=0;
+boolean s3=0;
+boolean s4=0;
+boolean s5=0;
+boolean s6=0;
 
 // Prepare the menu
 Menu menu = Menu(menuUsed,menuChanged);
