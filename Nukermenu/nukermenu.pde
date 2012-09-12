@@ -331,40 +331,29 @@ void menuUsed(ItemUseEvent event)
   display("UseEvent Triggered");
   #endif
   // Mode Items
-  if (event == &SubModes1) { 
+  if (event == &SubModes1) {
     if (m1 == 0) { 
-      m1 = 1;
-      m2 = 0;
-      m3 = 0;
+        clearM();
+        m1 = 1;
     }
-    else { 
-      m1 = 0;
-      reset_zone(0); // Reset lights
-    }
+    else { reset_zone(0); }
     ShowModeItem(1);
   }
   else if (event == &SubModes2) {
-    if (m2 == 0) { 
-      m1 = 0;
-      m2 = 1;
-      m3 = 0;
+    if (m2 == 0) {
+        clearM();
+        m2 = 1;
     }
-    else { 
-      m2 = 0;
-      reset_zone(0); // Reset lights
-    }
+    else { reset_zone(0); }
     ShowModeItem(2);
   }
   else if (event == &SubModes3) {
-    if (m3 == 0) {
-      m1 = 0;
-      m2 = 0;
-      m3 = 1;
+    clearM();
+    if (m3 == 0) { 
+        clearM();
+        m3 = 1;
     }
-    else { 
-      m3 = 0;
-      reset_zone(0); // Reset lights
-    }
+    else { reset_zone(0); }
     ShowModeItem(3);
   }
   // Zone Items
@@ -372,7 +361,7 @@ void menuUsed(ItemUseEvent event)
     if (z1 == 0) { z1 = 1; }
     else { 
       z1 = 0;
-      reset_zone(1); // Reset lights
+      reset_zone(1);
     }
     ShowZoneItem(1);
   }
@@ -393,14 +382,10 @@ void menuUsed(ItemUseEvent event)
     ShowZoneItem(3);
   }
   // Strip Items
-  else if (event == &SubStrip1) { 
+  else if (event == &SubStrip1) {
     if (s1 == 0) {
+      clearS();
       s1 = 1;
-      s2 = 0;
-      s3 = 0;
-      s4 = 0;
-      s5 = 0;
-      s6 = 0;
     }
     else { 
       s1 = 0;
@@ -410,12 +395,8 @@ void menuUsed(ItemUseEvent event)
   }
   else if (event == &SubStrip2) { 
     if (s2 == 0) { 
-      s1 = 0;
+      clearS();
       s2 = 1;
-      s3 = 0;
-      s4 = 0;
-      s5 = 0;
-      s6 = 0;
     }
     else {
       s2 = 0;
@@ -425,12 +406,8 @@ void menuUsed(ItemUseEvent event)
   }
   else if (event == &SubStrip3) { 
     if (s2 == 0) { 
-      s1 = 0;
-      s2 = 0;
+      clearS();
       s3 = 1;
-      s4 = 0;
-      s5 = 0;
-      s6 = 0;
     }
     else {
       s3 = 0;
@@ -440,12 +417,8 @@ void menuUsed(ItemUseEvent event)
   }
   else if (event == &SubStrip4) { 
     if (s2 == 0) { 
-      s1 = 0;
-      s2 = 0;
-      s3 = 0;
+      clearS();
       s4 = 1;
-      s5 = 0;
-      s6 = 0;
     }
     else {
       s4 = 0;
@@ -455,12 +428,8 @@ void menuUsed(ItemUseEvent event)
   }
   else if (event == &SubStrip5) { 
     if (s2 == 0) { 
-      s1 = 0;
-      s2 = 0;
-      s3 = 0;
-      s4 = 0;
+      clearS();
       s5 = 1;
-      s6 = 0;
     }
     else {
       s5 = 0;
@@ -470,11 +439,7 @@ void menuUsed(ItemUseEvent event)
   }
   else if (event == &SubStrip6) { 
     if (s2 == 0) { 
-      s1 = 0;
-      s2 = 0;
-      s3 = 0;
-      s4 = 0;
-      s5 = 0;
+      clearS();
       s6 = 1;
     }
     else {
@@ -484,4 +449,21 @@ void menuUsed(ItemUseEvent event)
     ShowStripItem(6);
   }
   else { display("Error #1921"); }
+}
+
+// Clear mode settings when changing modes so only is active at a time.
+void clearM() {
+    m1 = 0;
+    m2 = 0;
+    m3 = 0;
+}
+
+// Clear strip settings when changing strip modes so only is active at a time.
+void clearS() {
+    s1 = 0;
+    s2 = 0;
+    s3 = 0;
+    s4 = 0;
+    s5 = 0;
+    s6 = 0;
 }
