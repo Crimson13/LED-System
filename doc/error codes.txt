@@ -1,0 +1,31 @@
+Quick Reference:
+
+1910 - Invalid Mode Item (Coding Error; Contact Developer)
+1911 - Invalid Zone Item (Coding Error; Contact Developer)
+1912 - Invalid Strip Item (Coding Error; Contact Developer)
+1920 - Unknown Menu Item during menu change event (Coding Error; Contact Developer)
+1921 - Unknown Menu Item during menu use event (Coding Error; Contact Developer)
+
+
+
+
+
+
+
+Technical Reference: 
+
+1xxx = nukermenu.pde
+ 9xx = Coding Error
+  1x = Option Display System
+   0 = Invalid Mode Item
+   1 = Invalid Zone Item
+   2 = Invalid Strip Item
+  2x = Menu System
+   0 = Unknown Menu Item during menu change event
+   1 = Unknown Menu Item during menu use event
+2xxx = Nukerchuck.pde 
+3xxx = lights.pde
+4xxx = customlogo.pde
+5xxx = lightstrip.pde
+
+ 

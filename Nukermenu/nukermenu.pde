@@ -164,7 +164,7 @@ void ShowModeItem(const int mode)
         if (m3) { display("Mode 3 - ON"); }
         else { display("Mode 3 - OFF"); }
     }
-    else { display("Error: Invalid Mode Given!"); }
+    else { display("Error #1910"); }
 }
 
 // Display the given zone and if its on or off
@@ -185,7 +185,7 @@ void ShowZoneItem(const int zone)
         if (z3) { display("Zone 3 - ON"); }
         else { display("Zone 3 - OFF"); }
     }
-    else { display("Error: Invalid Zone Given!"); }
+    else { display("Error #1911"); }
 }
 
 // Display the given Strip Mode and if its on or off
@@ -221,7 +221,7 @@ void ShowStripItem(const int mode)
         if (s6) { display("Altering - ON"); }
         else { display("Altering - OFF"); }
     }
-    else { display("Error: Invalid Strip Mode Given!"); }
+    else { display("Error #1912"); }
 }
 
 // Main program loop
@@ -321,7 +321,7 @@ void menuChanged(ItemChangeEvent event)
   else if (event == &SubStrip4) { ShowStripItem(4); }
   else if (event == &SubStrip5) { ShowStripItem(5); }
   else if (event == &SubStrip6) { ShowStripItem(6); }
-  else { display("Error: Unknown Menu Item"); }
+  else { display("Error #1920"); }
 }
 
 // Event: Called when a menu item is used.
@@ -483,5 +483,5 @@ void menuUsed(ItemUseEvent event)
     }
     ShowStripItem(6);
   }
-  else { display("Error: Unknown or invalid selection"); }
+  else { display("Error #1921"); }
 }
