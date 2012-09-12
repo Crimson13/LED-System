@@ -456,6 +456,7 @@ void clearM() {
     m1 = 0;
     m2 = 0;
     m3 = 0;
+    li_clear_progress();
 }
 
 // Clear strip settings when changing strip modes so only is active at a time.
@@ -466,4 +467,5 @@ void clearS() {
     s4 = 0;
     s5 = 0;
     s6 = 0;
+    ls_clear_progress();
 }

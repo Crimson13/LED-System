@@ -217,3 +217,19 @@ void p6_dostep(int timediff) {
         p6_timeleft = s_p6_stepdelay;
     }
 }
+
+// Clear current progress and set back to inital values
+void ls_clear_progress() {
+    p1_step = 0;
+    p1_timeleft = 0;
+    p2_step = 0;
+    p2_timeleft = 0;
+    p3_step = 0;
+    p3_timeleft = 0;
+    p4_step = 0;
+    p4_timeleft = 0;
+    p5_step = 0;
+    p5_timeleft = 0;
+    p6_step = 0;
+    p6_timeleft = 0;
+}

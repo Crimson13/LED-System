@@ -255,3 +255,13 @@ void reset_zone(int zone, boolean force)
       break;
   }
 }
+
+// Clear current progress and set back to inital values
+void li_clear_progress() {
+    m1_step = 0;
+    m1_timeleft = 0;
+    m2_step = 0;
+    m2_timeleft = 0;
+    m3_step = 0;
+    m3_timeleft = 0;
+}
