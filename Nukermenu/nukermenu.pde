@@ -29,6 +29,10 @@ byte z2=0;
 byte z3=0;
 byte s1=0;
 byte s2=0;
+byte s3=0;
+byte s4=0;
+byte s5=0;
+byte s6=0;
 
 // Prepare the menu
 Menu menu = Menu(menuUsed,menuChanged);
@@ -46,6 +50,10 @@ Menu menu = Menu(menuUsed,menuChanged);
     SubMenu subStrip = SubMenu(menuChanged);
       SubMenuItem SubStrip1 = SubMenuItem();
       SubMenuItem SubStrip2 = SubMenuItem();
+      SubMenuItem SubStrip3 = SubMenuItem();
+      SubMenuItem SubStrip4 = SubMenuItem();
+      SubMenuItem SubStrip5 = SubMenuItem();
+      SubMenuItem SubStrip6 = SubMenuItem();
 
 // Prepare the LiquidCrystal Library
 LiquidCrystal lcd(A0, A1, 12);
@@ -77,6 +85,10 @@ void setup()
       menuStrip.addSubMenu(subStrip);
         subStrip.addSubMenuItem(SubStrip1);
         subStrip.addSubMenuItem(SubStrip2);
+        subStrip.addSubMenuItem(SubStrip3);
+        subStrip.addSubMenuItem(SubStrip4);
+        subStrip.addSubMenuItem(SubStrip5);
+        subStrip.addSubMenuItem(SubStrip6);
     menu.select(0);
     subModes.select(0);
     subZones.select(0);
@@ -191,6 +203,26 @@ void ShowStripItem(const int mode)
         if (s2) { display("Fill Left - ON"); }
         else { display("Fill Left - OFF"); }
     }
+    else if (mode == 3)
+    {
+        if (s3) { display("Mid to Out - ON"); }
+        else { display("Mid to Out - OFF"); }
+    }
+    else if (mode == 4)
+    {
+        if (s4) { display("WigWag - ON"); }
+        else { display("WigWag - OFF"); }
+    }
+    else if (mode == 5)
+    {
+        if (s5) { display("WigWag Alt - ON"); }
+        else { display("WigWag Alt - OFF"); }
+    }
+    else if (mode == 6)
+    {
+        if (s6) { display("Altering - ON"); }
+        else { display("Altering - OFF"); }
+    }
     else { display("Error: Invalid Strip Mode Given!"); }
 }
 
@@ -199,7 +231,7 @@ void loop()
 {
   // Call loop functions in other modules as necessary so they can do their thing.
   loop_li(m1,m2,m3,z1,z2,z3);
-  loop_ls(s1,s2);
+  loop_ls(s1,s2,s3,s4,s5,s6);
   
   // Process menu movement
   switch (loop_nc()) {
@@ -287,6 +319,10 @@ void menuChanged(ItemChangeEvent event)
   else if (event == &menuStrip) { display("Light Strip"); }
   else if (event == &SubStrip1) { ShowStripItem(1); }
   else if (event == &SubStrip2) { ShowStripItem(2); }
+  else if (event == &SubStrip3) { ShowStripItem(3); }
+  else if (event == &SubStrip4) { ShowStripItem(4); }
+  else if (event == &SubStrip5) { ShowStripItem(5); }
+  else if (event == &SubStrip6) { ShowStripItem(6); }
   else { display("Error: Unknown Menu Item"); }
 }
 
@@ -363,6 +399,10 @@ void menuUsed(ItemUseEvent event)
     if (s1 == 0) {
       s1 = 1;
       s2 = 0;
+      s3 = 0;
+      s4 = 0;
+      s5 = 0;
+      s6 = 0;
     }
     else { 
       s1 = 0;
@@ -374,12 +414,76 @@ void menuUsed(ItemUseEvent event)
     if (s2 == 0) { 
       s1 = 0;
       s2 = 1;
+      s3 = 0;
+      s4 = 0;
+      s5 = 0;
+      s6 = 0;
     }
     else {
       s2 = 0;
       resetStrip();
     }
     ShowStripItem(2);
+  }
+  else if (event == &SubStrip3) { 
+    if (s2 == 0) { 
+      s1 = 0;
+      s2 = 0;
+      s3 = 1;
+      s4 = 0;
+      s5 = 0;
+      s6 = 0;
+    }
+    else {
+      s3 = 0;
+      resetStrip();
+    }
+    ShowStripItem(3);
+  }
+  else if (event == &SubStrip4) { 
+    if (s2 == 0) { 
+      s1 = 0;
+      s2 = 0;
+      s3 = 0;
+      s4 = 1;
+      s5 = 0;
+      s6 = 0;
+    }
+    else {
+      s4 = 0;
+      resetStrip();
+    }
+    ShowStripItem(4);
+  }
+  else if (event == &SubStrip5) { 
+    if (s2 == 0) { 
+      s1 = 0;
+      s2 = 0;
+      s3 = 0;
+      s4 = 0;
+      s5 = 1;
+      s6 = 0;
+    }
+    else {
+      s5 = 0;
+      resetStrip();
+    }
+    ShowStripItem(5);
+  }
+  else if (event == &SubStrip6) { 
+    if (s2 == 0) { 
+      s1 = 0;
+      s2 = 0;
+      s3 = 0;
+      s4 = 0;
+      s5 = 0;
+      s6 = 1;
+    }
+    else {
+      s6 = 0;
+      resetStrip();
+    }
+    ShowStripItem(6);
   }
   else { display("Error: Unknown or invalid selection"); }
 }
