@@ -405,7 +405,7 @@ void menuUsed(ItemUseEvent event)
     ShowStripItem(2);
   }
   else if (event == &SubStrip3) { 
-    if (s2 == 0) { 
+    if (s3 == 0) { 
       clearS();
       s3 = 1;
     }
@@ -416,7 +416,7 @@ void menuUsed(ItemUseEvent event)
     ShowStripItem(3);
   }
   else if (event == &SubStrip4) { 
-    if (s2 == 0) { 
+    if (s4 == 0) { 
       clearS();
       s4 = 1;
     }
@@ -427,7 +427,7 @@ void menuUsed(ItemUseEvent event)
     ShowStripItem(4);
   }
   else if (event == &SubStrip5) { 
-    if (s2 == 0) { 
+    if (s5 == 0) { 
       clearS();
       s5 = 1;
     }
@@ -438,7 +438,7 @@ void menuUsed(ItemUseEvent event)
     ShowStripItem(5);
   }
   else if (event == &SubStrip6) { 
-    if (s2 == 0) { 
+    if (s6 == 0) { 
       clearS();
       s6 = 1;
     }

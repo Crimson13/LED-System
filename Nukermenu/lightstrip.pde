@@ -130,8 +130,8 @@ void p3_dostep(int timediff) {
         if (p3_step == 0) { resetStrip(); }
         else {
             int offset = p3_step - 1;
-            setGroupColor((s_p3_stepcount-1)-offset, 255, 255, 0);
-            setGroupColor((s_p3_stepcount)+offset, 255, 255, 0);
+            setGroupColor((rmid-1)-offset, 255, 255, 0);
+            setGroupColor((rmid)+offset, 255, 255, 0);
         }
         
         // If we did the last step, start over, otherwise increment step count.
