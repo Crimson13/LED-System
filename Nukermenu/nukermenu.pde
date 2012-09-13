@@ -46,11 +46,11 @@ Menu menu = Menu(menuUsed,menuChanged);
       SubMenuItem SubZones3 = SubMenuItem();
   MenuItem menuStrip = MenuItem();
     SubMenu subStrip = SubMenu(menuChanged);
-      SubMenuItem SubStrip1 = SubMenuItem();
-      SubMenuItem SubStrip2 = SubMenuItem();
-      SubMenuItem SubStrip3 = SubMenuItem();
-      SubMenuItem SubStrip4 = SubMenuItem();
-      SubMenuItem SubStrip5 = SubMenuItem();
+      SubMenuItem SubStrip1 = SubMenuItem(); // Note: If items 4-6 do not show up
+      SubMenuItem SubStrip2 = SubMenuItem(); //   then you need to modify the menu
+      SubMenuItem SubStrip3 = SubMenuItem(); //   library to allow it to have all
+      SubMenuItem SubStrip4 = SubMenuItem(); //   6 items. See the README file for
+      SubMenuItem SubStrip5 = SubMenuItem(); //   information on how to do this.
       SubMenuItem SubStrip6 = SubMenuItem();
 
 // Prepare the LiquidCrystal Library
