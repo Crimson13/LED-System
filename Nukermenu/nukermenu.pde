@@ -336,7 +336,10 @@ void menuUsed(ItemUseEvent event)
         clearM();
         m1 = 1;
     }
-    else { reset_zone(0); }
+    else { 
+        m1 = 0;
+        reset_zone(0);
+    }
     ShowModeItem(1);
   }
   else if (event == &SubModes2) {
@@ -344,7 +347,10 @@ void menuUsed(ItemUseEvent event)
         clearM();
         m2 = 1;
     }
-    else { reset_zone(0); }
+    else { 
+        m2 = 0;
+        reset_zone(0);
+    }
     ShowModeItem(2);
   }
   else if (event == &SubModes3) {
@@ -353,7 +359,10 @@ void menuUsed(ItemUseEvent event)
         clearM();
         m3 = 1;
     }
-    else { reset_zone(0); }
+    else { 
+        m3 = 0;
+        reset_zone(0);
+    }
     ShowModeItem(3);
   }
   // Zone Items
