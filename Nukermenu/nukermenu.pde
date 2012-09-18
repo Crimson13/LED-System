@@ -354,7 +354,6 @@ void menuUsed(ItemUseEvent event)
     ShowModeItem(2);
   }
   else if (event == &SubModes3) {
-    clearM();
     if (m3 == 0) { 
         clearM();
         m3 = 1;
