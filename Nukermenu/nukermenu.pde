@@ -151,18 +151,18 @@ void ShowModeItem(const int mode)
 {
     if (mode == 1)
     {
-        if (m1) { display("Mode 1 - ON"); }
-        else { display("Mode 1 - OFF"); }
+        if (m1) { display("Fast3 - ON"); }
+        else { display("Fast3 - OFF"); }
     }
     else if (mode == 2)
     {
-        if (m2) { display("Mode 2 - ON"); }
-        else { display("Mode 2 - OFF"); }
+        if (m2) { display("WigWag - ON"); }
+        else { display("WigWag - OFF"); }
     }
     else if (mode == 3)
     {
-        if (m3) { display("Mode 3 - ON"); }
-        else { display("Mode 3 - OFF"); }
+        if (m3) { display("Caution - ON"); }
+        else { display("Caution - OFF"); }
     }
     else { display("Error #1910"); }
 }
@@ -172,13 +172,13 @@ void ShowZoneItem(const int zone)
 {
     if (zone == 1)
     {
-        if (z1) { display("Zone 1 - ON"); }
-        else { display("Zone 1 - OFF"); }
+        if (z1) { display("Front - ON"); }
+        else { display("Front - OFF"); }
     }
     else if (zone == 2)
     {
-        if (z2) { display("Zone 2 - ON"); }
-        else { display("Zone 2 - OFF"); }
+        if (z2) { display("Rear - ON"); }
+        else { display("Rear - OFF"); }
     }
     else if (zone == 3)
     {
@@ -193,33 +193,33 @@ void ShowStripItem(const int mode)
 {
     if (mode == 1)
     {
-        if (s1) { display("Fill Right - ON"); }
-        else { display("Fill Right - OFF"); }
+        if (s1) { display("TA Right - ON"); }
+        else { display("TA Right - OFF"); }
     }
     else if (mode == 2)
     {
-        if (s2) { display("Fill Left - ON"); }
-        else { display("Fill Left - OFF"); }
+        if (s2) { display("TA Left - ON"); }
+        else { display("TA Left - OFF"); }
     }
     else if (mode == 3)
     {
-        if (s3) { display("Mid to Out - ON"); }
-        else { display("Mid to Out - OFF"); }
+        if (s3) { display("TA Mid Out - ON"); }
+        else { display("TA Mid Out - OFF"); }
     }
     else if (mode == 4)
     {
-        if (s4) { display("WigWag - ON"); }
-        else { display("WigWag - OFF"); }
+        if (s4) { display("TA WigWag - ON"); }
+        else { display("TA WigWag - OFF"); }
     }
     else if (mode == 5)
     {
-        if (s5) { display("WigWag Alt - ON"); }
-        else { display("WigWag Alt - OFF"); }
+        if (s5) { display("TA Fast3 - ON"); }
+        else { display("TA Fast3 - OFF"); }
     }
     else if (mode == 6)
     {
-        if (s6) { display("Altering - ON"); }
-        else { display("Altering - OFF"); }
+        if (s6) { display("TA Alt - ON"); }
+        else { display("TA Alt - OFF"); }
     }
     else { display("Error #1912"); }
 }
