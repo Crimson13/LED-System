@@ -200,6 +200,7 @@ void m3_dostep(boolean z1, boolean z2, boolean z3, int timediff)
         if (z3) { 
           digitalWrite(s_z3_redpin, HIGH);
           digitalWrite(s_z3_bluepin, HIGH);
+        }
         break;
       case 1:
         // Both lights off
@@ -214,6 +215,7 @@ void m3_dostep(boolean z1, boolean z2, boolean z3, int timediff)
         if (z3) { 
           digitalWrite(s_z3_redpin, LOW);
           digitalWrite(s_z3_bluepin, LOW);
+        }
         break;
     }
     // If we did the last step, start over, otherwise increment step count.
@@ -224,8 +226,8 @@ void m3_dostep(boolean z1, boolean z2, boolean z3, int timediff)
     m3_timeleft = s_m3_stepdelay;
   }
 }
-}
-}
+
+
 /* Reset the pins to offfor the given zone. 0 for all, force to turn them on first */
 void reset_zone(int zone) { return reset_zone(zone, 0); }
 void reset_zone(int zone, boolean force)
