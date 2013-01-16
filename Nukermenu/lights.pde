@@ -15,6 +15,8 @@ const int s_z1_redpin = 2;
 const int s_z1_bluepin = 3;
 const int s_z2_redpin = 4;
 const int s_z2_bluepin = 5;
+const int s_z3_redpin = 6;
+const int s_z3_bluepin = 7;
 
 // Settings
 const int s_m1_stepdelay = 75;
@@ -39,6 +41,8 @@ void setup_li()
   pinMode(s_z1_redpin, OUTPUT);
   pinMode(s_z2_bluepin, OUTPUT);
   pinMode(s_z2_redpin, OUTPUT);
+  pinMode(s_z3_bluepin, OUTPUT);
+  pinMode(s_z3_redpin, OUTPUT);
   
   reset_zone(0,1); // Force a full reset on all light zones so they start off
   
@@ -76,7 +80,7 @@ void m1_dostep(boolean z1, boolean z2, boolean z3, int timediff)
         // Red Light On
         if (z1) digitalWrite(s_z1_redpin, HIGH);
         if (z2) digitalWrite(s_z2_redpin, HIGH);
-        if (z3) { /* Nothing yet... */ } 
+        if (z3) digitalWrite(s_z3_redpin, HIGH);
         break;
       case 1:
       case 3:
@@ -84,7 +88,7 @@ void m1_dostep(boolean z1, boolean z2, boolean z3, int timediff)
         // Red Light Off
         if (z1) digitalWrite(s_z1_redpin, LOW);
         if (z2) digitalWrite(s_z2_redpin, LOW);
-        if (z3) { /* Nothing yet... */ } 
+        if (z3) digitalWrite(s_z3_redpin, LOW);
         break;
       case 8:
       case 10:
@@ -92,7 +96,7 @@ void m1_dostep(boolean z1, boolean z2, boolean z3, int timediff)
         // Blue Light On
         if (z1) digitalWrite(s_z1_bluepin, HIGH);
         if (z2) digitalWrite(s_z2_bluepin, HIGH);
-        if (z3) { /* Nothing yet... */ } 
+        if (z3) digitalWrite(s_z3_bluepin, HIGH);
         break;
       case 9:
       case 11:
@@ -100,7 +104,7 @@ void m1_dostep(boolean z1, boolean z2, boolean z3, int timediff)
         // Blue Light Off
         if (z1) digitalWrite(s_z1_bluepin, LOW);
         if (z2) digitalWrite(s_z2_bluepin, LOW);
-        if (z3) { /* Nothing yet... */ } 
+        if (z3) digitalWrite(s_z3_bluepin, LOW);
         break;
       case 6:
       case 7:
@@ -136,25 +140,25 @@ void m2_dostep(boolean z1, boolean z2, boolean z3, int timediff)
         // Red Light on
         if (z1) digitalWrite(s_z1_redpin, HIGH);
         if (z2) digitalWrite(s_z2_redpin, HIGH);
-        if (z3) { /* Nothing yet... */ } 
+        if (z3) digitalWrite(s_z3_redpin, HIGH);
         break;
       case 1:
         // Red Light off
         if (z1) digitalWrite(s_z1_redpin, LOW);
         if (z2) digitalWrite(s_z2_redpin, LOW);
-        if (z3) { /* Nothing yet... */ } 
+        if (z3) digitalWrite(s_z3_redpin, LOW);
         break;
       case 2:
         // Blue Light on
         if (z1) digitalWrite(s_z1_bluepin, HIGH);
         if (z2) digitalWrite(s_z2_bluepin, HIGH);
-        if (z3) { /* Nothing yet... */ } 
+        if (z3) digitalWrite(s_z3_bluepin, HIGH);
         break;
       case 3:
         // Blue Light off
         if (z1) digitalWrite(s_z1_bluepin, LOW);
         if (z2) digitalWrite(s_z2_bluepin, LOW);
-        if (z3) { /* Nothing yet... */ } 
+        if (z3) digitalWrite(s_z3_bluepin, LOW);
         break;
       default:
         break; /* Nothing yet... */
@@ -193,7 +197,9 @@ void m3_dostep(boolean z1, boolean z2, boolean z3, int timediff)
           digitalWrite(s_z2_redpin, HIGH);
           digitalWrite(s_z2_bluepin, HIGH);
         }
-        if (z3) { /* Nothing yet... */ }
+        if (z3) { 
+          digitalWrite(s_z3_redpin, HIGH);
+          digitalWrite(s_z3_bluepin, HIGH);
         break;
       case 1:
         // Both lights off
@@ -205,8 +211,9 @@ void m3_dostep(boolean z1, boolean z2, boolean z3, int timediff)
           digitalWrite(s_z2_redpin, LOW);
           digitalWrite(s_z2_bluepin, LOW);
         }
-        if (z3) { /* Nothing yet... */ } 
-
+        if (z3) { 
+          digitalWrite(s_z3_redpin, LOW);
+          digitalWrite(s_z3_bluepin, LOW);
         break;
     }
     // If we did the last step, start over, otherwise increment step count.
@@ -217,7 +224,8 @@ void m3_dostep(boolean z1, boolean z2, boolean z3, int timediff)
     m3_timeleft = s_m3_stepdelay;
   }
 }
-
+}
+}
 /* Reset the pins to offfor the given zone. 0 for all, force to turn them on first */
 void reset_zone(int zone) { return reset_zone(zone, 0); }
 void reset_zone(int zone, boolean force)
@@ -250,8 +258,11 @@ void reset_zone(int zone, boolean force)
       break;
     case 3:
       if (force) {
+        digitalWrite(s_z3_redpin, HIGH);
+        digitalWrite(s_z3_bluepin, HIGH);
       }
-      /* Nothing yet */
+      digitalWrite(s_z3_redpin, LOW);
+      digitalWrite(s_z3_bluepin, LOW);
       break;
   }
 }
