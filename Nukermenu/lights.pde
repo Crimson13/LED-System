@@ -242,8 +242,8 @@ void reset_zone(int zone, boolean force)
       break;
     case 2:
       if (force) {
-        digitalWrite(s_z2_redpin, LOW);
-        digitalWrite(s_z2_bluepin, LOW);
+        digitalWrite(s_z2_redpin, HIGH);
+        digitalWrite(s_z2_bluepin, HIGH);
       }
       digitalWrite(s_z2_redpin, LOW);
       digitalWrite(s_z2_bluepin, LOW);
